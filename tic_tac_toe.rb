@@ -1,40 +1,55 @@
 # Board Class?
 
 class Board
-    attr_accessor :baordCells
+    attr_accessor :board
 
     def initialize()
         @isXTurn = true
-        @boardCells = [
-            [-1, -1, -1],
+        @board = [
+            ["X", -1, -1],
             [-1, -1, -1],
             [-1, -1, -1]
         ]
     end
 
-    def choosePosition
-        position = []
+    def get_cell
+        cell = self.select_cell # let user select a cell
+
+        # check if the chosen position was already selected or not
+        while (board[pos[0]][pos[1]] == "X" || board[pos[0]][pos[1]] == "O")
+            # the cell was already chosen prompt the user for a new cell
+            puts "Cell already chosen"
+            pos = self.select_cell
+        end
+
+        cell
+    end
+
+    def select_cell
+        return_cell = [] # Variable to store chosen position
         
-        print "Select row (1-3): "
+        # Get user's selected row
+        print "Select row (0-2): "
         row = gets.chomp.to_i
 
-        while (row < 1 || row > 3)
-            print "Out of range!\nSelect row (1-3): "
+        while (row < 0 || row > 2)
+            print "Out of range!\nSelect row (0-2): "
             row = gets.chomp.to_i
         end
 
-        print "Select column (1-3): "
+        # Get user's selected column
+        print "Select column (0-2): "
         col = gets.chomp.to_i
 
-        while (col < 1 || col > 3)
-            print "Out of range!\nSelect column (1-3): "
+        while (col < 0 || col > 2)
+            print "Out of range!\nSelect column (0-2): "
             col = gets.chomp.to_i
         end
 
-        position.append(row)
-        position.append(col)
-
-        p position
+        # Append chosen row and col into return_cell array and return
+        return_cell.append(row)
+        return_cell.append(col)
+        return_cell
     end
 
     # def playGame
@@ -45,6 +60,6 @@ class Board
 end
 
 board = Board.new
-board.choosePosition
+puts board.get_position
 
     
