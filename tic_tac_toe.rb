@@ -12,6 +12,15 @@ class Board
         ]
     end
 
+    # include some way of changing who's turn it is maybe not in this function though
+    def modify_cell(cell)
+        if (isXTurn)
+            self.board[cell[0]][cell[1]] = "X"
+        else
+            self.board[cell[0]][cell[1]] = "X"
+        end
+    end
+
     def get_cell
         cell = self.select_cell # let user select a cell
 
@@ -22,7 +31,7 @@ class Board
             pos = self.select_cell
         end
 
-        cell
+        modify_cell(cell)
     end
 
     def select_cell
